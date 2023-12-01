@@ -57,7 +57,8 @@ public class Expense extends PanacheEntity{
     @Column(name = "associate_id")
     public Long associateId;
 
-
+    // TODO: Add a no-argument constructor
+    public Expense() {}
 
     public Expense( /*UUID uuid,*/ String name, LocalDateTime creationDate,
             PaymentMethod paymentMethod, String amount, Associate associate) {
