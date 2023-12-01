@@ -133,6 +133,25 @@ public class CrudTest {
 
     @Test
     @Order(4)
+    public void showAll() {
+        // Create a couple more
+        creatingAnExpenseReturns201WithHeaders();
+        creatingAnExpenseReturns201WithHeaders();
+
+        // Getting the list of expenses
+        Response expense = given()
+                .when()
+                    .get()
+                .then()
+                    .statusCode(200)
+                    //.body("$.size()", is(1))
+                    .extract()
+                    .response();
+        System.out.printf( "ExpenseList[%s]\n\n",expense.getBody().asString() );
+    }
+
+    @Test
+    @Order(5)
     public void deleteNonExistingExpenseReturns404() {
         given()
             .pathParam("uuid", NON_EXISTING_UUID)
@@ -143,15 +162,15 @@ public class CrudTest {
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     public void deleteExistingExpenseReturns204() {
-        // Getting the list of expenses
+        // Getting the list of expenses - bad test since it only expects a single expense.
         Response expense = given()
                 .when()
                     .get()
                 .then()
                     .statusCode(200)
-                    .body("$.size()", is(1))
+                    .body("$.size()", not(0))
                     .extract()
                     .response();
 
@@ -167,6 +186,7 @@ public class CrudTest {
         .then()
             .statusCode(204);
     }
+
 
 
     public static String generateExpenseJson(String uuid, String expenseName, String paymentType, double amount) {

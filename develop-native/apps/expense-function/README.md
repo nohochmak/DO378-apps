@@ -1,5 +1,9 @@
 # expense-function Project
+-------------------------------------------------------------------
+2023 Nov 22 
+This project was finally built successfully using Podman - container build.  Can deploy to OpenShift but need to setup a Postgres pod or connect to instance running in Podman using Egress Connector.  Should document how that can be done here.
 
+-------------------------------------------------------------------
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

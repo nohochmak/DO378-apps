@@ -1,4 +1,13 @@
 # expense-restful-service Project
+This needs to go into my own source repo in order to not miss development notes.
+
+-------------------------------------------------------------------
+2023 Nov 27 
+
+Nothing too complex in this.  Should review the REST-Assured docs:  https://github.com/rest-assured/rest-assured
+
+-------------------------------------------------------------------
+
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

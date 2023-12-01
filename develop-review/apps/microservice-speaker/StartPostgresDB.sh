@@ -1,0 +1,1 @@
+podman run --name postgres-orm -p 5432:5432 -e POSTGRES_PASSWORD=developer -e POSTGRES_USER=developer -e POSTGRES_DB=testing -d docker.io/library/postgres:14

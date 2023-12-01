@@ -1,18 +1,18 @@
 package com.redhat.training.expenses;
 
 import java.math.BigDecimal;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 import com.redhat.training.expenses.Expense.PaymentMethod;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+@QuarkusTest
 public class ExpenseValidationTest {
-
+    @Inject
     ExpenseConfiguration config;
-
+    @Inject
     ExpenseValidator validator;
 
     @Test

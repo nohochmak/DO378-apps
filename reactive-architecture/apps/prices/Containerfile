@@ -1,4 +1,5 @@
-FROM registry.ocp4.example.com:8443/ubi9/python-39
+#FROM registry.ocp4.example.com:8443/ubi9/python-39
+FROM registry.access.redhat.com/ubi9/python-39@sha256:967000729b17efdea309e297f4b1961c38b902a1ef18f6d886b8086c2a12f01f
 
 COPY requirements.txt .
 

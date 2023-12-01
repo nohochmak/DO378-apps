@@ -1,6 +1,12 @@
 
 ## Run derby database in local host
 
+----------------------------------------------
+2023 Nov 29 - Dev notes
+NativeScheduleResourceIT.java:  @NativeImageTest --> @QuarkusIntegrationTest   see https://quarkus.io/guides/building-native-image
+
+
+----------------------------------------------
 Go to `src/main/docker`
 
 Build the Derby image ...

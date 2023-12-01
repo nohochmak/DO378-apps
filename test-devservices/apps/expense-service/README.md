@@ -1,5 +1,13 @@
 # expense-restful-service project
 
+-------------------------------------------
+2023 Nov 29 - Dev Notes
+Podman doesn't work for Quarkus 2.13 - the DO378 lab version or 3.2.6 versions.  Had to start docker instead.  
+resources/import.sql 
+hibernate_sequence had been renamed in Hibernate 6+ : https://thorben-janssen.com/sequence-naming-strategies-in-hibernate-6/
+replaced with Expense_SEQ per migration instructions.
+-------------------------------------------
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

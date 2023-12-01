@@ -22,12 +22,14 @@ public class ProductsResource {
     PricesService pricesService;
 
     @GET
+    //@NonBlocking
     @Path( "/{productId}/priceHistory" )
-    public ProductPriceHistory getProductPriceHistory( @PathParam( "productId" ) final Long productId ) {
+    public Uni<ProductPriceHistory> getProductPriceHistory( @PathParam( "productId" ) final Long productId ) {
         return pricesService.getProductPriceHistory( productId );
     }
 
     @GET
+    @Blocking
     @Path( "/blocking" )
     public Uni<String> blocking() {
         try {

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "schedule"
+		},
+		{
+			"path": "session"
+		},
+		{
+			"path": "speaker"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
+}

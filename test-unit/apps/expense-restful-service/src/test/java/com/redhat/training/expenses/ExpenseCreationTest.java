@@ -9,12 +9,31 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.theInstance;
 
+@QuarkusTest
+@TestHTTPEndpoint( ExpenseResource.class )
 public class ExpenseCreationTest {
+
+    
+    
 
     @Test
     public void testCreateExpense() {
+        given() 
+            .body( Expense.of( "Test Expense", PaymentMethod.CASH, "1234" ) ) 
+            .contentType( ContentType.JSON ) 
+            .post();
 
+        when()
+            .get()
+        .then()
+            .statusCode( 200 )
+            .body( "size()", is( 1 ) ) 
+            .body( "[0].name", is( "Test Expense" ) ) 
+            .body( "[0].paymentMethod", is( PaymentMethod.CASH.name() ) ) 
+            .body( "[0].amount", is( 1234.0F ) );
+         
     }
 
 }

@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "expense-service"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
+}

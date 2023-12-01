@@ -5,31 +5,41 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.Optional;
 
-import javax.json.bind.annotation.JsonbCreator;
-import javax.json.bind.annotation.JsonbDateFormat;
-import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.json.bind.annotation.JsonbTransient;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import org.hibernate.annotations.Type;
 
-// TODO: Add @Entity annotation and extend PanacheEntity
-public class Expense {
+import org.hibernate.annotations.JdbcTypeCode;
+//Note: following is deprecated use @JdbcTypeCode instead.
+//import org.hibernate.annotations.Type;
+
+// Add @Entity annotation and extend PanacheEntity
+@Entity
+public class Expense extends PanacheEntity{
+
+    // Add a default constructor
+    public Expense() {}
 
     public enum PaymentMethod {
         CASH, CREDIT_CARD, DEBIT_CARD,
     }
-
-    @Type(type = "uuid-char")
-    @NotNull
-    public UUID uuid;
+    // Note: @Type is deprecated. use @JdbcTypeCode instead.
+    //@JdbcTypeCode(Types.LONGNVARCHAR)  //(type = "uuid-char" )
+    //@GeneratedValue(strategy = GenerationType.UUID)
+    //@NotNull
+    //public UUID uuid;
     public String name;
 
     @JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
@@ -37,36 +47,55 @@ public class Expense {
     public PaymentMethod paymentMethod;
     public BigDecimal amount;
 
-    // TODO: Add many-to-one relationship between expense and associate
+    // Add many-to-one relationship between expense and associate
+    @JsonbTransient 
+    @ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "associate_id", insertable = false, updatable = false)
     public Associate associate;
 
-     // TODO: Annotate the associateId with @Column
+     // Annotate the associateId with @Column
+    @Column(name = "associate_id")
     public Long associateId;
 
-    // TODO: Add a default constructor
 
-    public Expense(UUID uuid, String name, LocalDateTime creationDate,
+
+    public Expense( /*UUID uuid,*/ String name, LocalDateTime creationDate,
             PaymentMethod paymentMethod, String amount, Associate associate) {
-        this.uuid = uuid;
+        //this.uuid = uuid;
         this.name = name;
         this.creationDate = creationDate;
         this.paymentMethod = paymentMethod;
         this.amount = new BigDecimal(amount);
         this.associate = associate;
-        // TODO: Add associateId association
+        // Add associateId association
+        this.associateId = associate.id;
     }
 
     public Expense(String name, PaymentMethod paymentMethod, String amount, Associate associate) {
-        this(UUID.randomUUID(), name, LocalDateTime.now(), paymentMethod, amount, associate);
+        this( name, LocalDateTime.now(), paymentMethod, amount, associate);
     }
 
     @JsonbCreator
     public static Expense of(String name, PaymentMethod paymentMethod, String amount, Long associateId) {
 
-        // TODO: Update regarding the new relationship
-        return new Expense(name, paymentMethod, amount, null);
+        // Update regarding the new relationship
+        return Associate.<Associate>findByIdOptional(associateId)
+            .map(associate -> new Expense(name, paymentMethod, amount, associate)) 
+            .orElseThrow(RuntimeException::new);
     }
 
-    // TODO: Add update() method
+    // Add update() method
+    public static void update( final Expense expense ) {
+        Optional<Expense> previous = Expense.findByIdOptional( expense.id );
 
+        previous.ifPresentOrElse(( update ) -> { 
+            //update.uuid = expense.uuid; 
+            update.name = expense.name; 
+            update.amount = expense.amount; 
+            update.paymentMethod = expense.paymentMethod; 
+            update.persist();
+        }, () -> { throw new WebApplicationException( Response.Status.NOT_FOUND ); 
+        });
+
+    }
 }

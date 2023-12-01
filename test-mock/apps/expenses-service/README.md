@@ -1,5 +1,14 @@
 # expense-restful-service project
 
+-----------------------------------------------
+2023 Nov 29 - Dev Notes
+    For Expenses.java  need to migrate to Hibernate 6+
+    import org.hibernate.annotations.Types  --> import org.hibernate.annotations.JdbcTypeCode;
+    
+    @Types (type="uuid-char")  --> @JdbcTypeCode( Types.VARCHAR )
+    public UUID uuid;
+-----------------------------------------------
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

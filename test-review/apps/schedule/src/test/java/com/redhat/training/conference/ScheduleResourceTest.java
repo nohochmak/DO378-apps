@@ -15,7 +15,8 @@ import io.quarkus.test.common.http.TestHTTPEndpoint;
 
 import io.restassured.http.ContentType;
 
-
+@QuarkusTest
+@TestHTTPEndpoint( ScheduleResource.class )
 public class ScheduleResourceTest {
 
     private static final int GIVEN_ID = 101;

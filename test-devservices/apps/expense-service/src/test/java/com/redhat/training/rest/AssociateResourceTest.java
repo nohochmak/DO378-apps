@@ -13,6 +13,7 @@ import com.redhat.training.model.Associate;
 
 @QuarkusTest
 @TestHTTPEndpoint( AssociateResource.class )
+@WithPostgresDB( name = "tc-test", username = "tc-user", password = "tc-pass")
 public class AssociateResourceTest {
 
 	@Test

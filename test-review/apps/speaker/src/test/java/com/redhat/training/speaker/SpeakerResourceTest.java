@@ -17,6 +17,9 @@ import java.util.Collections;
 @QuarkusTest
 public class SpeakerResourceTest {
 
+    @Inject
+    DeterministicIdGenerator idGenerator;
+
     @Test
     public void testNewSpeaker() {
 

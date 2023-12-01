@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "solutions/expense-client"
+		},
+		{
+			"path": "solutions/expense-service"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
+}

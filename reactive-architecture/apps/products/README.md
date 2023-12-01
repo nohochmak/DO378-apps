@@ -1,4 +1,18 @@
 # Products Project
+--------------------------------------------------------
+2023 Nov 30 - Dev Notes
+For this project used Quarkus 2.13 (DO378 recommended) version in .m2/settings.xml
+
+But in order get it to work outside of the lab environment had to make a few changes.
+1. Changed the Prices image in ContainerFile to use the access.redhat version
+2. Ran a Podman build to create new local image "redhattraining/do378-reactive-architecture-prices" in docker/podman registry
+3. Created a container instance manually using Podman: 
+    podman run --name prices -p 5000:5000  -d redhattraining/do378-reactive-architecture-prices
+
+This was annoying but not terribly complex.
+
+Pushing this back to my GitHub repo to capture changes.
+--------------------------------------------------------
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

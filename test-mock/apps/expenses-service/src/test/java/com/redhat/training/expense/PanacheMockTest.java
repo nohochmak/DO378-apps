@@ -13,5 +13,24 @@ import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 public class PanacheMockTest {
+    @BeforeAll 
+    public static void setup() { 
+        PanacheMock.mock( Expense.class ); 
+    }
 
+    @Test 
+    public void testExample() {
+
+        Mockito 
+            .when(Expense.listAll()) 
+            .thenReturn(Collections.emptyList());
+        
+        given() 
+            .when()
+                .get("/expenses") 
+            .then()
+                .statusCode(200)
+                .body("$.size()", is(0));
+        
+        }
 }
