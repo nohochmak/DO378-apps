@@ -1,5 +1,12 @@
 # DO378-apps
 
+## ------------------------------------
+## Upgrade to Quarkus 3.2.6-Final
+Many of these lesson projects have been upgraded to use Quarkus 3 builds.  There were changes to javax -> jakarta and some hibernate 6+ changes.  Please see the Quarkus migration to 3.0 guide for more info.
+Also see notes in individual project Readme.md files
+## ------------------------------------
+
+
 This repository contains the applications used in the [**Red Hat Cloud-native Microservices
 Development with Quarkus**](https://www.redhat.com/en/services/training/red-hat-cloud-native-microservices-development-quarkus-do378) course.
 
